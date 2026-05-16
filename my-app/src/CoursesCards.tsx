@@ -1,4 +1,6 @@
 // TSX - TypeScript XML
+import './CoursesCards.css';
+
 function CoursesCards() {
   // static data
   // real world apps - you call backend APIs (ExpressJS) and get the data
