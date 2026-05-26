@@ -16,6 +16,8 @@ import About from "./About";
 import Contact from "./Contact";
 import CoursesCards from "./CoursesCards";
 import EmployeeDirectory from "./EmployeeDirectory";
+import UserList from "./UserList";
+import UserDetail from "./UserDetail";
 
 function App() {
   return (
@@ -65,6 +67,11 @@ function App() {
                     Employees
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/users">
+                    Users
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -77,10 +84,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/courses" element={<CoursesCards />} />
             <Route path="/employees" element={<EmployeeDirectory />} />
+            <Route path="/users" element={<UserList />} />
+            <Route path="/users/:id" element={<UserDetail />} />
           </Routes>
         </main>
       </div>
-
     </Router>
   );
 }
