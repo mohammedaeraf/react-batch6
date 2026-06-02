@@ -18,6 +18,7 @@ import CoursesCards from "./CoursesCards";
 import EmployeeDirectory from "./EmployeeDirectory";
 import UserList from "./UserList";
 import UserDetail from "./UserDetail";
+import PostList from "./PostList";
 
 function App() {
   return (
@@ -72,6 +73,11 @@ function App() {
                     Users
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/posts">
+                    Posts
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -86,6 +92,7 @@ function App() {
             <Route path="/employees" element={<EmployeeDirectory />} />
             <Route path="/users" element={<UserList />} />
             <Route path="/users/:id" element={<UserDetail />} />
+            <Route path="/posts" element={<PostList />} />
           </Routes>
         </main>
       </div>
