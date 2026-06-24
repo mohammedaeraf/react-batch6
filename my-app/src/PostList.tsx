@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Define the shape of a single post object returned by the API.
 // This gives TypeScript strong typing for the `posts` state and helps
@@ -18,6 +18,8 @@ function PostList() {
   // `error` stores a friendly error message when fetching fails.
   // A null value means there is no error and the normal UI is shown.
   const [error, setError] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Fetch posts from the example JSONPlaceholder API.
   // The function is async so `await` can be used for the network request
@@ -40,12 +42,31 @@ function PostList() {
       // Update state with the posts returned by the API.
       setPosts(data);
       setError(null);
+      setLoading(false);
     } catch (err: any) {
       // Save the error text so the component can render an error state.
       setError(err.message);
       console.error(err);
+    } finally {
+      // clean-up
+      setLoading(false);
     }
   };
+
+  // To call a function when component loads/mounts
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+  // blank array means it will load once on component load
+
+  if (loading == true) {
+    return (
+      <div className="container text-center mt-5">
+        <div className="spinner-border text-primary"></div>
+        <p className="mt-3 text-muted">Loading data...</p>
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -67,9 +88,9 @@ function PostList() {
       <h2 className="text-warning mb-4 text-center">Post List Component</h2>
 
       {/* Button click triggers fetching posts from the API. */}
-      <button className="btn btn-info mb-3" onClick={fetchPosts}>
+      {/* <button className="btn btn-info mb-3" onClick={fetchPosts}>
         Fetch Posts
-      </button>
+      </button> */}
 
       {/* Render the list of posts. If the list is empty, nothing is shown yet. */}
       <ul className="list-group">
