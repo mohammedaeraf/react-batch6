@@ -1,18 +1,14 @@
-// TSX - TypeScript XML
 function Courses() {
   return (
     <div>
-      <h2>Course List</h2>
-      <ul>
-        <li>Full Stack MERN</li>
-        <li>Web Design</li>
-        <li>Python</li>
-        <li>Data Analytics</li>
-        <li>Cybersecurity</li>
-        <li>Frontend React</li>
+      <h3 className="text-success fw-bold">List of Courses</h3>
+      <ul className="list-group">
+        <li className="list-group-item">Frontend React</li>
+        <li className="list-group-item">Python Programming</li>
+        <li className="list-group-item">Web Design</li>
+        <li className="list-group-item">Advanced Excel</li>
       </ul>
     </div>
   );
 }
-
 export default Courses;

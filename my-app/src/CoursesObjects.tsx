@@ -2,6 +2,7 @@
 function CoursesObjects() {
   // static data
   // real world apps - you call backend APIs (ExpressJS) and get the data
+  // An array of objects
   let courses = [
     {
       id: 1,
@@ -35,14 +36,14 @@ function CoursesObjects() {
 
   return (
     <div className="p-3">
-      <h2 className="mb-4 text-secondary">Course List</h2>
+      <h2 className="mb-4 text-info">Course List</h2>
       <ul className="list-group">
         {courses.map((course) => (
           <li className="list-group-item">
-            <h4 className="fw-bold text-primary">{course.name}</h4>
-            <h5 className="text-secondary">Duration: {course.duration}</h5>
-            <div className="text-muted">{course.description}</div>
-            <div className="text-danger">Price - ${course.price}</div>
+            <h3 className="fw-bold">{course.name}</h3>
+            <p className="text-muted">{course.description}</p>
+            <h5>Duration: {course.duration}</h5>
+            <p className="text-success">Price: $ {course.price}</p>
           </li>
         ))}
       </ul>
