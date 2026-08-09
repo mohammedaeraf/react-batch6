@@ -33,22 +33,26 @@ function UsersTable() {
         Fetch Posts
       </button>
       <table className="table table-bordered table-striped table-hover">
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Website</th>
-        </tr>
-        {users.map((user) => (
-          <tr key={user.id}>
-            <td>{user.id}</td>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.phone}</td>
-            <td>{user.website}</td>
+        <thead className="table-danger">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Website</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.phone}</td>
+              <td>{user.website}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
