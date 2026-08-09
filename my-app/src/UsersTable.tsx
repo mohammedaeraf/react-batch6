@@ -30,7 +30,7 @@ function UsersTable() {
     <div className="p-3">
       <h2 className="mb-4 text-info">List of Users</h2>
       <button className="btn btn-info my-3" onClick={fetchUsers}>
-        Fetch Posts
+        Fetch Users
       </button>
       <table className="table table-bordered table-striped table-hover">
         <thead className="table-danger">
