@@ -1,6 +1,4 @@
-import PostsList from "./PostsList";
-
-
+import UsersTable from "./UsersTable";
 
 function App() {
   return (
@@ -8,7 +6,7 @@ function App() {
       <h1 className="text-warning text-center py-5">
         Welcome to Future Leaders Academy
       </h1>
-      <PostsList></PostsList>
+      <UsersTable></UsersTable>
     </div>
   );
 }
