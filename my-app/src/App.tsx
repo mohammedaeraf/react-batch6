@@ -1,12 +1,10 @@
-import UsersTable from "./UsersTable";
+import RecipeList from "./RecipeList";
 
 function App() {
   return (
     <div className="container">
-      <h1 className="text-warning text-center py-5">
-        Welcome to Future Leaders Academy
-      </h1>
-      <UsersTable></UsersTable>
+      <h1 className="text-center text-primary">Recipe App</h1>
+      <RecipeList></RecipeList>
     </div>
   );
 }
