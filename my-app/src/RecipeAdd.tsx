@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "https://67a75555203008941f674e2f.mockapi.io/recipes";
 
@@ -11,6 +12,9 @@ function RecipeAdd() {
   const [difficulty, setDifficulty] = useState<string>("");
   const [cuisine, setCuisine] = useState<string>("");
 
+  const navigate = useNavigate();
+
+  // hits the API and adds the Recipe in Backend
   const addRecipe = async () => {
     // JavaScript
     const recipe = {
@@ -22,19 +26,17 @@ function RecipeAdd() {
       cuisine,
     };
 
-    console.log(recipe);
-
     await fetch(API_URL, {
-        method:"POST",
-        headers: {
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(recipe)
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipe),
     });
 
-    // Call API
+    // redirect to RecipeList component after adding
+    navigate("/recipes");
   };
-
   return (
     <div className="container">
       <div className="border rounded shadow p-4">
@@ -52,7 +54,6 @@ function RecipeAdd() {
             onChange={(event) => setName(event.target.value)}
           />
         </div>
-
         {/* Controls for Prep Time */}
         <div className="mb-3">
           <label htmlFor="prepTimeTextBox" className="form-label text-warning">
@@ -67,7 +68,6 @@ function RecipeAdd() {
             onChange={(event) => setPrepTimeMinutes(event.target.value)}
           />
         </div>
-
         {/* Controls for Cook Time */}
         <div className="mb-3">
           <label htmlFor="cookTimeTextBox" className="form-label text-warning">
@@ -82,7 +82,6 @@ function RecipeAdd() {
             onChange={(event) => setCookTimeMinutes(event.target.value)}
           />
         </div>
-
         {/* Controls for Cook Time */}
         <div className="mb-3">
           <label htmlFor="servingsTextBox" className="form-label text-warning">
@@ -97,7 +96,6 @@ function RecipeAdd() {
             onChange={(event) => setServings(event.target.value)}
           />
         </div>
-
         {/* Controls for Difficulty */}
         <div className="mb-3">
           <label
@@ -115,7 +113,6 @@ function RecipeAdd() {
             onChange={(event) => setDifficulty(event.target.value)}
           />
         </div>
-
         {/* Controls for Cusine */}
         <div className="mb-3">
           <label htmlFor="cuisineTextBox" className="form-label text-warning">
@@ -130,7 +127,6 @@ function RecipeAdd() {
             onChange={(event) => setCuisine(event.target.value)}
           />
         </div>
-
         {/* Control for Add Recipe button */}
         <div className="mt-5">
           <button className="btn btn-primary w-100" onClick={() => addRecipe()}>
