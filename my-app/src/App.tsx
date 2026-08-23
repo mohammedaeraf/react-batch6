@@ -3,6 +3,7 @@ import RecipeAdd from "./RecipeAdd";
 import RecipeList from "./RecipeList";
 import Home from "./Home";
 import About from "./About";
+import RecipeEdit from "./RecipeEdit";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/recipes" element={<RecipeList />} />
               <Route path="/recipes-add" element={<RecipeAdd />} />
+              <Route path="/recipes-edit/:id" element={<RecipeEdit />} />
             </Routes>
           </main>
         </header>
