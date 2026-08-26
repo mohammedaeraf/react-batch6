@@ -14,26 +14,26 @@ interface Recipe {
 const API_URL = "https://67a75555203008941f674e2f.mockapi.io/recipes";
 
 function RecipeEdit() {
-  // Create provision to store data entered by the user
+  // The recipe is undefined until the API request finishes.
   const [recipe, setRecipe] = useState<Recipe>();
 
   const navigate = useNavigate();
   let params = useParams();
 
   const fetchRecipe = async () => {
+    // Load the recipe identified by the route before filling the form.
     const response = await fetch(`${API_URL}/${params.id}`);
     const recipe: Recipe = await response.json();
     setRecipe(recipe);
   };
 
-  // useEffect to load Recipe data in form fields when component mounts (loads)
+  // Fetch the current recipe on first render and whenever the route ID changes.
   useEffect(() => {
     fetchRecipe();
   }, [params.id]);
 
-  // hits the API and adds the Recipe in Backend
+  // Send the edited form values to the API, then return to the recipe list.
   const editRecipe = async () => {
-
     await fetch(`${API_URL}/${params.id}`, {
       method: "PUT",
       headers: {
@@ -60,6 +60,7 @@ function RecipeEdit() {
             id="nameTextBox"
             value={recipe?.name}
             onChange={(e) =>
+              // Ignore changes until a recipe has been loaded.
               setRecipe((currentRecipe) =>
                 currentRecipe
                   ? { ...currentRecipe, name: e.target.value }
@@ -177,7 +178,7 @@ function RecipeEdit() {
             className="btn btn-primary w-100"
             onClick={() => editRecipe()}
           >
-           Update
+            Update
           </button>
         </div>
       </div>
