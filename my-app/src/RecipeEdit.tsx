@@ -1,46 +1,38 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+interface Recipe {
+  id: string;
+  name: string;
+  prepTimeMinutes: string;
+  cookTimeMinutes: string;
+  servings: string;
+  difficulty: string;
+  cuisine: string;
+}
+
 const API_URL = "https://67a75555203008941f674e2f.mockapi.io/recipes";
 
 function RecipeEdit() {
   // Create provision to store data entered by the user
-  const [name, setName] = useState<string>("");
-  const [prepTimeMinutes, setPrepTimeMinutes] = useState<string>("");
-  const [cookTimeMinutes, setCookTimeMinutes] = useState<string>("");
-  const [servings, setServings] = useState<string>("");
-  const [difficulty, setDifficulty] = useState<string>("");
-  const [cuisine, setCuisine] = useState<string>("");
+  const [recipe, setRecipe] = useState<Recipe>();
 
   const navigate = useNavigate();
   let params = useParams();
 
   const fetchRecipe = async () => {
     const response = await fetch(`${API_URL}/${params.id}`);
-    const recipe = await response.json();
-    setName(recipe.name);
-    setPrepTimeMinutes(recipe.prepTimeMinutes);
-    setCookTimeMinutes(recipe.cookTimeMinutes);
-    setServings(recipe.servings);
-    setDifficulty(recipe.difficulty);
-    setCuisine(recipe.cuisine);
+    const recipe: Recipe = await response.json();
+    setRecipe(recipe);
   };
 
-  useEffect( () => {
+  // useEffect to load Recipe data in form fields when component mounts (loads)
+  useEffect(() => {
     fetchRecipe();
-  }, [params.id])
+  }, [params.id]);
 
   // hits the API and adds the Recipe in Backend
   const editRecipe = async () => {
-    // JavaScript
-    const recipe = {
-      name,
-      prepTimeMinutes,
-      cookTimeMinutes,
-      servings,
-      difficulty,
-      cuisine,
-    };
 
     await fetch(`${API_URL}/${params.id}`, {
       method: "PUT",
@@ -66,8 +58,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Recipe Name"
             id="nameTextBox"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={recipe?.name}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, name: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Controls for Prep Time */}
@@ -80,8 +78,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Preparation Time in Minutes"
             id="prepTimeTextBox"
-            value={prepTimeMinutes}
-            onChange={(event) => setPrepTimeMinutes(event.target.value)}
+            value={recipe?.prepTimeMinutes}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, prepTimeMinutes: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Controls for Cook Time */}
@@ -94,8 +98,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Cooking Time in Minutes"
             id="cookTimeTextBox"
-            value={cookTimeMinutes}
-            onChange={(event) => setCookTimeMinutes(event.target.value)}
+            value={recipe?.cookTimeMinutes}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, cookTimeMinutes: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Controls for Cook Time */}
@@ -108,8 +118,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Number of Servings"
             id="servingsTextBox"
-            value={servings}
-            onChange={(event) => setServings(event.target.value)}
+            value={recipe?.servings}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, servings: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Controls for Difficulty */}
@@ -125,8 +141,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Level of Difficulty (Easy, Medium, Hard)"
             id="difficultyTextBox"
-            value={difficulty}
-            onChange={(event) => setDifficulty(event.target.value)}
+            value={recipe?.difficulty}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, difficulty: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Controls for Cusine */}
@@ -139,8 +161,14 @@ function RecipeEdit() {
             className="form-control"
             placeholder="Enter Cuisine (Indian, Chinese, Bhatkali)"
             id="cuisineTextBox"
-            value={cuisine}
-            onChange={(event) => setCuisine(event.target.value)}
+            value={recipe?.cuisine}
+            onChange={(e) =>
+              setRecipe((currentRecipe) =>
+                currentRecipe
+                  ? { ...currentRecipe, cuisine: e.target.value }
+                  : currentRecipe,
+              )
+            }
           />
         </div>
         {/* Control for Add Recipe button */}
@@ -149,7 +177,7 @@ function RecipeEdit() {
             className="btn btn-primary w-100"
             onClick={() => editRecipe()}
           >
-            Edit Recipe
+           Update
           </button>
         </div>
       </div>
