@@ -22,6 +22,20 @@ function RecipeList() {
     setRecipes(data);
   };
 
+  // code to delete Recipe by calling the API
+  const deleteRecipe = async (id: string) => {
+    // ask confirmation from user before deleting
+    const isDeleteConfirmed = window.confirm(
+      "Are you sure you want to delete the selected Recipe?",
+    );
+
+    if (isDeleteConfirmed) {
+      const API_URL = `https://67a75555203008941f674e2f.mockapi.io/recipes/${id}`;
+      await fetch(API_URL, { method: "DELETE" });
+      fetchRecipes();
+    }
+  };
+
   // To load data directly on component mount
   useEffect(() => {
     fetchRecipes();
@@ -63,12 +77,12 @@ function RecipeList() {
                 >
                   Edit
                 </Link>
-                <Link
-                  to={`/recipes-edit/${recipe.id}`}
+                <button
                   className="btn btn-danger me-2"
+                  onClick={() => deleteRecipe(recipe.id)}
                 >
                   Delete
-                </Link>
+                </button>
               </td>
             </tr>
           ))}
