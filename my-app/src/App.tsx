@@ -4,6 +4,7 @@ import RecipeList from "./RecipeList";
 import Home from "./Home";
 import About from "./About";
 import RecipeEdit from "./RecipeEdit";
+import RecipeSearch from "./RecipeSearch";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/recipes" element={<RecipeList />} />
+              <Route path="/recipes" element={<RecipeSearch />} />
               <Route path="/recipes-add" element={<RecipeAdd />} />
               <Route path="/recipes-edit/:id" element={<RecipeEdit />} />
             </Routes>
